@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html><head><title></title>
+<style>
+	.column {
+		width: calc(90vw / 3);
+		height: 100vh;
+		float:left;
+		margin-right: 20px;
+	}
+	.column img {
+		width: 100%;
+	}
+	#diff {
+		background-color: #ccc;
+	}
+	p {
+		text-align: center;
+		font-family: arial;
+		font-size: 20px;
+		color: #cc00cc;
+	}
+</style>
+<script type="text/javascript" src="/js/lunadiff.min.js"></script>
+<script type="text/javascript">
+
+	function cb(o){
+		document.getElementById('diff').innerHTML = '<img src="' + o.diff2 + '" />';
+	}
+	
+	function insertUI(){
+	
+	}
+	
+	window.onload = function(){
+	
+		if (lunadiff){
+			document.getElementsByTagName('body')[0].removeChild(document.getElementById('errmsg'));
+		}
+	
+		var imageOnePath = 'test-images/www.cnn.com_1.png';
+		var imageTwoPath = 'test-images/www.cnn.com_2.png';
+	
+		var options = 
+			{
+				prox:13, // proximity (used by diff areas function)
+				color:'#ff00ff', // diff color
+				diffThreshold:25, // diff threshold - if pixels differ by greater than this amount then there is a diff
+				drawBoundingBoxFlag:false, // draw bounding box flag
+				ctx1Alpha:1, // alpha for the diff when written to the image
+				ctx2Alpha:1  // alpha for the diff when written to the image
+			};
+		
+		lunadiff.init(
+			imageOnePath, // image one
+			imageTwoPath, // image two
+			cb,
+			options
+		);
+	}
+	
+</script>
+
+</head>
+<body>
+
+	<p id="errmsg">You must run a server to view this example: $gulp serve</p>
+	
+	<div id="appWrapper">
+		<div class="column">
+			<img src="test-images/www.cnn.com_1.png" />
+		</div>
+		<div id="diff" class="column">
+			<p>Please wait...</p>
+		</div>
+		<div class="column">
+			<img src="test-images/www.cnn.com_2.png" />
+		</div>
+	</div>
+
+</body>
+</html>

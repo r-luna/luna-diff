@@ -8,8 +8,9 @@ gulp.task('minify', function () {
       .pipe(uglify())
 	  .pipe(rename('lunadiff.min.js'))
       .pipe(gulp.dest('./dist/'))
+	  .pipe(gulp.dest('./examples/js'));
 });
 
 gulp.task('default', ['minify']);
 
-gulp.task('serve', serve('./'));
+gulp.task('serve', serve('./examples/'));
