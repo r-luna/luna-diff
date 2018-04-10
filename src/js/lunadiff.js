@@ -275,4 +275,4 @@
 
 	};
 
-})(this.imgdiff = this.imgdiff || {});
+})(this.lunadiff = this.lunadiff || {});
