@@ -1,0 +1,40 @@
+{
+  "name": "luna-diff",
+  "version": "1.0.0",
+  "description": "image differ using html5 canvas",
+  "main": "gulpfile.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {
+    "uglify-js": "^3.3.20"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-serve": "^1.4.0",
+    "gulp-uglify": "^3.0.0"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r-luna/luna-diff.git"
+  },
+  "keywords": [
+    "javascript",
+    "image",
+    "diff",
+    "image",
+    "differ",
+    "diff",
+    "differ"
+  ],
+  "author": "Rick Luna",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/r-luna/luna-diff/issues"
+  },
+  "homepage": "https://github.com/r-luna/luna-diff#readme"
+}
