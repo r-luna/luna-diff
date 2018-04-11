@@ -1,22 +1,96 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title></title>
-		<style>
-			li {
-				font-size: 20px;
-				margin-bottom: 20px;
-				font-family: arial;
-			}
-		</style>
-	</head>
-	<body>
+<html><head><title></title>
+<style>
+	.column {
+		width: calc(90vw / 3);
+		float:left;
+		margin-right: 20px;
+	}
+	.column img {
+		width: 100%;
+	}
+	.full-height {
+		height: 100vh;
+	}
+	#diff {
+		background-color: #ccc;
+	}
+	p {
+		text-align: center;
+		font-family: arial;
+		font-size: 20px;
+		color: #cc00cc;
+	}
+    .small {
+        font-size:14px;
+        color:#000;
+    }
+</style>
+<script type="text/javascript" src="/js/lunadiff.min.js"></script>
+<script type="text/javascript">
+
+	function cb(o){
+		console.log(o);
+        var pLen = (o.img1.height * o.img1.width * 4) + (o.img2.height * o.img2.width * 4);
+		document.getElementById('img1-title').innerHTML = 'Image 1<br><span class="small">Width: ' + o.img1.height + 'px, Height: ' + o.img1.width + 'px</span>';
+		document.getElementById('img2-title').innerHTML = 'Image 2<br><span class="small">Width: ' + o.img2.height + 'px, Height:' + o.img2.width + 'px</span>';
+		document.getElementById('diff-title').innerHTML = 'Diff   <br><span class="small">Pixel arrays of length ' + pLen + ' diffed in ' + Math.round(o.analysisTime) + 'ms';
+		document.getElementById('diff').innerHTML = '<img src="' + o.diff2 + '" />';
+	}
+	
+	window.onload = function(){
+		if (lunadiff){
+			// You must view this using $gulp serve 
+			// Using the file:/// scheme results in tainted canvases - and this example wont work!
+			document.getElementsByTagName('body')[0].removeChild(document.getElementById('errmsg'));
+		}
+	
+		window.setTimeout(function(){
+			var imageOnePath = 'test-images/www.cnn.com_1.png';
+			var imageTwoPath = 'test-images/www.cnn.com_2.png';
 		
-		<ol>
-			<li><a href="basic-compare-1.html">Example that starts a diff operation when the page is loaded. After a few seconds the diff is displayed within the page.</a></li>
-			<li><a href="basic-compare-2.html">Another example that starts a diff operation when the page is loaded. Both images are printed to the screen with the diff areas written on top of them both.</a></li>
-			<li><a href="compare-with-ui.html">An example with a fully built UI for selecting images to diff. They are prepopulated with images to try, just click on the "Compare" button. 3 images are displayed, the original image, the compared-to image and a diff of the two. Image stats are displayed.</a></li>
-		</ol>
-		
-	</body>
+			var options = 
+				{
+					prox:13, // proximity (used by diff areas function)
+					color:'#ff00ff', // diff color
+					diffThreshold:25, // diff threshold - if pixels differ by greater than this amount then there is a diff
+					drawBoundingBoxFlag:false, // draw bounding box flag
+					ctx1Alpha:1, // alpha for the diff when written to the image
+					ctx2Alpha:1  // alpha for the diff when written to the image
+				};
+			
+			lunadiff.init(
+				imageOnePath, // image one
+				imageTwoPath, // image two
+				cb,
+				options
+			)
+		},500);
+	}
+	
+</script>
+
+</head>
+<body>
+
+	<p id="errmsg">You must run a server to view this example: $gulp serve</p>
+	
+	<div>
+		<div class="column"><p id="img1-title">Image 1<br>&nbsp;</p></div>
+		<div class="column"><p id="diff-title">Diff<br>&nbsp;</p></div>
+		<div class="column"><p id="img2-title">Image 2<br>&nbsp;</p></div>
+	</div>
+	<div>
+		<div class="column full-height">
+			<img src="test-images/www.cnn.com_1.png" />
+		</div>
+		<div id="diff" class="column full-height">
+			<p>Please wait...</p>
+		</div>
+		<div class="column full-height">
+			<img src="test-images/www.cnn.com_2.png" />
+		</div>
+	</div>
+
+</body>
 </html>
