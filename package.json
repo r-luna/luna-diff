@@ -1,6 +1,6 @@
 {
   "name": "luna-diff",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "image differ using html5 canvas",
   "main": "gulpfile.js",
   "directories": {
